@@ -735,8 +735,8 @@ am_mp_carwash_launch`4112`41306516dedd8091b1a4736eb4af900246c93729
 ainewengland_test`4112`fc634d5b5edfaad507fe3171793913a47112e93b
 aicover_test`4112`81aecfa0c559efbfa581f184a8af9ead84bc7044
 ) do (
-    set /a Counter+=1, percentage=Counter*100/698
-    title [!percentage!/100%%]  ^|  Script working, please wait... - !TITLE!
+    set /a Counter+=1, Percentage=Counter*100/698
+    title [!Percentage!/100%%]  ^|  Script working, please wait... - !TITLE!
     for /f "tokens=1-3delims=`" %%B in ("%%A") do (
         for %%E in (%%B.csc %%B.xsc) do (
             if exist %%E (
