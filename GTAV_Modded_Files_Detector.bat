@@ -750,7 +750,9 @@ aicover_test`4112`81aecfa0c559efbfa581f184a8af9ead84bc7044
                         set hash=
                     )
                     for /f "delims=" %%F in ('certutil -hashfile %%E SHA1 ^| findstr /rxc:"[a-f0-9 ]*"') do (
-                        set "hash=%%F"
+                        if not defined hash (
+                            set "hash=%%F"
+                        )
                     )
                     if defined hash (
                         set "hash=!hash: =!"
