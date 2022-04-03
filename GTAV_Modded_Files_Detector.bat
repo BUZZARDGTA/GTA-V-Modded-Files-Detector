@@ -746,19 +746,22 @@ aicover_test`4112`81aecfa0c559efbfa581f184a8af9ead84bc7044
         for %%E in (%%B.csc %%B.xsc) do (
             if exist %%E (
                 if "%%~zE"=="%%C" (
+                    if defined hash (
+                        set hash=
+                    )
                     for /f "delims=" %%F in ('certutil -hashfile %%E SHA1 ^| findstr /rxc:"[a-f0-9 ]*"') do (
                         set "hash=%%F"
-                        if defined hash (
-                            set "hash=!hash: =!"
+                    )
+                    if defined hash (
+                        set "hash=!hash: =!"
+                    )
+                    if "!hash!"=="%%D" (
+                        del /f /q %%E
+                    ) else (
+                        if !found_modded_script!==0 (
+                            set found_modded_script=1
                         )
-                        if "!hash!"=="%%D" (
-                            del /f /q %%E
-                        ) else (
-                            if !found_modded_script!==0 (
-                                set found_modded_script=1
-                            )
-                            echo  │ ├ %%E
-                        )
+                        echo  │ ├ %%E
                     )
                 ) else (
                     if !found_modded_script!==0 (
